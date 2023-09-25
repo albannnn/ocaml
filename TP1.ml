@@ -48,7 +48,7 @@ let rec longueur list =
 (* head -> Renvoie la tete de la liste en args *)
 let head list = 
   match list with
-  |[] -> 0 ;
+  |[] -> [] ;
   |head :: tail -> head ;;
 (* tail -> renvoie la queue de la liste en args*)
   let tail list =
@@ -64,16 +64,25 @@ let rec creer_nouvelle_liste l1 longueur =
   match longueur with 
   | 0 -> [] ;
   | others -> head (l1) :: creer_nouvelle_liste(tail (l1)) (longueur - 1) ;;
+
 let rec get_elt list position = 
   match position with 
   |0 -> head list ;
-  |autres -> get_elt(tail (list)) (position - 1) ;; 
-let rec concatener l1 l2 = 
+  |autres -> get_elt(tail (list)) (position - 1) ;;
+
+let rec concatener (l1) (l2) = 
   match l1 with
   |[] -> l2
-  |l1 -> concatener(creer_nouvelle_liste(l1) (longueur (l1) - 1)) (get_elt (l1) (longueur (l1) - 1) :: l2) ;; 
+  |l1 -> concatener(creer_nouvelle_liste(l1) (longueur (l1) - 1)) 
+                   (get_elt (l1) (longueur (l1) - 1) :: l2) ;; 
 
+let rec miroir (l) = 
+  match l with
+  | [] -> [] ;
+  | [x] -> x :: [] ;
+  | tete :: queue ->  concatener (miroir(queue)) (tete :: []) ;;
 
 let l1 = [1;2;3;4;5] ;;
 let l2 = [6;7;8;9;10];;
+
 
