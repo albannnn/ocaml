@@ -68,12 +68,50 @@ let rec decode list =
   |[] -> []
   |head :: queue -> decode_tuple(head) @ decode queue ;;
 
-let listToTuple list = 
-  match list with
-  |[] -> failwith "pas top ça" ;
-  |head :: queue -> (longueur(head :: queue), head) ;; 
+(* Exercice 2 *)
 
 
+type expr =  
+|Nombre of int
+|Plus of (expr * expr)
+|Moins of (expr * expr)
+|Fois of (expr * expr)
+let est_valeur expr = 
+  match expr with 
+  |Nombre(n) -> true 
+  |Plus(n1, n2) | Moins(n1,n2) | Fois(n1,n2) -> false;;
+
+
+
+let rec nombre_operateurs expr =
+  match expr with
+  |Nombre(_) -> 0; 
+  |Plus(n1, n2) |Moins(n1,n2) |Fois(n1,n2) -> 1 + nombre_operateurs(n1) + nombre_operateurs(n2) ;; 
+
+let rec eval expr = 
+  match expr with
+  |Nombre(n) -> n;
+  |Plus(n1,n2) -> (eval(n1) + eval(n2))
+  |Moins(n1,n2) -> (eval(n1) - eval(n2))
+  |Fois(n1,n2) -> (eval(n1) * eval(n2)) ;; 
+
+let rec hauteur expr =
+  match expr with
+  |Nombre(n) -> 0;
+  |Plus(n1,n2)|Moins(n1,n2)|Fois(n1,n2) -> 1 + max(hauteur(n1))(hauteur(n2)) ;; 
+
+let rec to_string expr = 
+  match expr with 
+  |Nombre(n) -> string_of_int(n) ;
+  |Plus(n1,n2) -> "(" ^ to_string(n1) ^ "+" ^ to_string(n2) ^ ")";
+  |Moins(n1,n2) -> "(" ^ to_string(n1) ^ "-" ^ to_string(n2) ^ ")";
+  |Fois(n1,n2) -> "(" ^ to_string(n1) ^ "*" ^ to_string(n2) ^ ")";
+
+  (* Exercice 3 *)
+type couleur = Pique | Coeur | Carreau |Trefle
+type tete = Roi | Dame | Valet
+type valeur = Tete of tete | Nombre of int 
+type carte = {co : couleur ; va : valeur}
 
 
 
