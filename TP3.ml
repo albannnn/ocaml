@@ -21,12 +21,12 @@ let liste2 =  cons(0, liste1) ;;
 
 let tete liste = 
   match liste with
-  |Nil -> failwith "une liste vide n'a pas de tete" ;
+  |Nil -> failwith "Ah non mais la tu deconnes complet, t'as pas compris, mais c'est simple pourtant !!!!!!" ;
   |TeteEtQueue(tete, queue) -> tete ;;
 
   let queue liste = 
     match liste with
-    |Nil -> failwith "une liste vide n'a pas de queue" ;
+    |Nil -> failwith "Ah non mais la tu deconnes complet, t'as pas compris, mais c'est simple pourtant !!!!!!" ;
     |TeteEtQueue(tete, queue) -> queue ;;
   
 let rec taille liste = 
@@ -50,7 +50,10 @@ let rec supprime liste elt =
       TeteEtQueue(tete, supprime(queue)(elt)) ;;
 
 let rec element_no liste no =
-  match liste with
-  |Nil -> failwith "es gibt ein problem " ;
+  match no with 
+  |n when n < 0 -> failwith "Depuis quand une liste est plus petite que l'index gros????"
+  |0 -> tete liste ;
+  |n -> element_no (queue liste) (n - 1);;
+
   
 
