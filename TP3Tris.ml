@@ -5,7 +5,7 @@ let l2 = [5] ;;
 let l3 = [2;4;6;8;10] ;;
 
 let l3bis = [1;3;5;7;9;11];;
-let l4 = [5;4;3;2;1] ;;
+let l4 = [5;4;3;2;1] ;; 
 let l5 = [5;5;5;5;5] ;;
 let l6 = [5;6;4;9;5] ;; 
 let l7 = [9;3;2;7;0] ;;
@@ -34,7 +34,8 @@ let rec triSelection liste =
     let min =  minList liste in 
     let listeBis = retireElt liste min in 
     min :: triSelection listeBis ;; 
-
+    
+(* TRI FUSION *)
 let rec division liste = 
   match liste with
   |[] -> ([] , []) ; 
@@ -61,4 +62,3 @@ let rec triFusion l =
   |l -> 
     let l1, l2 = division(l) in 
     fusion (triFusion l1) (triFusion l2)  ;; 
-let l8 = [4;7;9;0;2;7;8;9] ;; 
